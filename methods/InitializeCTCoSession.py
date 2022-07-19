@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
 # A single session of the CTCollections 
-def session(username, password, url=r'https://madison.ctcollections.org/'):
+def session(username, password, url):
     """
     Initialize a selenium session in CTCo.
 
@@ -29,8 +29,3 @@ def session(username, password, url=r'https://madison.ctcollections.org/'):
     driver.find_element(By.XPATH, "//a[@aria-label='Login']").click()
     return driver
 
-
-if __name__ == '__main__':
-    username = 'Federico Barrera'
-    password = '`ad/g3${6'
-    ses = session(username, password)

@@ -94,7 +94,9 @@ if __name__ == '__main__':
     # Login info
     login = loginData()
     handle_elements = getHandleElements()
-    
+    url = input('Site url:')
+
+
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
     for i in range(1, len(handle_elements)):
@@ -105,5 +107,5 @@ if __name__ == '__main__':
 
     
     driver = session(login['username'], login['password'])
-    main(driver, objects)
+    main(driver, objects, url)
     driver.quit()
