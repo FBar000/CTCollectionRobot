@@ -4,9 +4,6 @@ Used to specify lists of items to automate location and admin settings.
 Usage:
 > py makeIdentifierList.py
 
-Input data.
-View result at: r"C:\Users\Federico\Desktop\SimplePrograms\MHSAutomation\automateLogs\partials"
-
 Feel free to feed previous as argument to automateLocAdm.py
 
 '''
@@ -15,6 +12,7 @@ import os
 
 
 def main():
+    """Creates a txt file with object identifiers in ~/data"""
     # Gather handle dataa
     print("="*50)
     print("TAG".center(50, "-"))

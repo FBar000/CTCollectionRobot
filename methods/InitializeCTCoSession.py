@@ -4,8 +4,6 @@ Initialize driver object for use in madison CTCo
 Federico Barrera
 12 July 2022
 '''
-
-import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait

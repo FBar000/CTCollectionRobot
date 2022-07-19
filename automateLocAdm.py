@@ -34,17 +34,18 @@ def loginData():
     return {'username': user, 'password': pas}
 
 
-def getHandles():
-    n = input('Sections in object identifiers: ')
+def getHandleElements():
+    '''Get elements to construct object identifiers'''
+    n = int(input('Sections in object identifiers: '))
     parts = []
     for i in range(n):
-        n = input("Label or Index? (l/i)")
+        n = input(f"Section {i+1}: Label or Index? (l/i) ")
         if n == 'l':
-            parts.append([input('Label: ')])
+            parts.append([input('\tLabel: ')])
         else:
-            l = input('Lower index: ')
-            t = input('Upper index: ')
-            width = input('Width: ')
+            l = int(input('\tLower bound: '))
+            t = int(input('\tUpper bound: '))
+            width = int(input('\tWidth: '))
             idx = [str(i).zfill(width) for i in range(l,t+1)]
             parts.append(idx)
     return parts
@@ -92,16 +93,17 @@ if __name__ == '__main__':
     '''
     # Login info
     login = loginData()
-    driver = session(login['username'], login['password'])
-    handles = getHandles()
-
+    handle_elements = getHandleElements()
+    
     # Generate object identifier
-    objects = [i for i in handles[0]]
-    for i in range(1, len(handles)):
+    objects = [i for i in handle_elements[0]]
+    for i in range(1, len(handle_elements)):
         tmp = []
         for ob in objects:
-            tmp += [".".join([ob, twig]) for twig in handles[i]]
+            tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
 
+    
+    driver = session(login['username'], login['password'])
     main(driver, objects)
     driver.quit()

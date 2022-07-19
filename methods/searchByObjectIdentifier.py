@@ -10,8 +10,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
-from InitializeCTCoSession import *
-
 # Takes initialized driver (as in InitializeCTCoSession.py) and the object identifier, as a string
 # Navigates to object_identifier page
 def searchByObjectIdentifier(driver, object_identifier):
@@ -32,12 +30,4 @@ def searchByObjectIdentifier(driver, object_identifier):
     if driver.current_url.endswith('/index.php/find/QuickSearch/Index'):            # Fix this; Not working
         driver.find_element(By.XPATH, f"//li[contains(text(), '{object_identifier}')]//a").click()
 
-if __name__ == '__main__':
-    # Get a session
-    username = 'Federico Barrera'
-    password = '`ad/g3${6'
-    ses = session(username, password)
-    # Search for an item
-    object_identifier = 'A2022.ClevelandFamily.015'
-    searchByObjectIdentifier(ses, object_identifier)
 
