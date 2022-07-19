@@ -11,8 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Import steps used in process
-from InitializeCTCoSession import *
-from searchByObjectIdentifier import *
+from methods import *
 
 # `objects` is a list with object identifier strings
 def main(driver, objects):

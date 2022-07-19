@@ -10,8 +10,10 @@ View result at: r"C:\Users\Federico\Desktop\SimplePrograms\MHSAutomation\automat
 Feel free to feed previous as argument to automateLocAdm.py
 
 '''
-
 # Fill txt file + return address
+import os
+
+
 def main():
     # Gather handle dataa
     print("="*50)
@@ -41,10 +43,15 @@ def main():
     for i in endings:
         tags.append('.'.join([handle, i]))
     # Write into a text file
-    with open(r"C:\Users\Federico\Desktop\SimplePrograms\MHSAutomation\automateLogs\data\objs.txt", "w") as f:
+    current_directory = os.getcwd()
+    final_directory = os.path.join(current_directory, 'objIdentifiers')
+    if not os.path.exists(final_directory):
+        os.makedirs(final_directory)
+    path = os.path.join(final_directory,  "objs.txt")
+    with open(path, 'w') as f:
         for i in tags:
             f.write(f'{i}\n')
-    return r"C:\Users\Federico\Desktop\SimplePrograms\MHSAutomation\automateLogs\data\objs.txt"
+    return path
 
 if __name__ == '__main__':
     main()
