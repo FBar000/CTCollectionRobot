@@ -1,0 +1,6 @@
+'''
+
+Stores credentials between sessions
+
+
+'''

@@ -12,6 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Import steps used in process
 from methods import *
+import loginCache
 
 # `objects` is a list with object identifier strings
 def main(driver, objects):
@@ -22,16 +23,6 @@ def main(driver, objects):
             format_item(driver, object_identifier)
         except:
             print('passed '+str(object_identifier))
-
-
-def loginData():
-    '''
-    Create dictionary with login credentials
-    '''
-    print("Input login credentials")
-    user = input('Username: ')
-    pas = input('Password: ')
-    return {'username': user, 'password': pas}
 
 
 def getHandleElements():
@@ -91,11 +82,16 @@ if __name__ == '__main__':
     '''
     Execute
     '''
-    # Login info
-    login = loginData()
+    # Fill credentials if necessary
+    if len(loginCache.login['username']) == 0:
+        loginCache.login['username'] = str(input('Username: '))
+    if len(loginCache.login['password']) == 0:
+        loginCache.login['password'] = str(input('Password: '))
+    if len(loginCache.login['url']) == 0:
+        loginCache.login['url'] = str(input('url: '))
+    
     handle_elements = getHandleElements()
     url = input('Site url:')
-
 
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
@@ -105,7 +101,6 @@ if __name__ == '__main__':
             tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
 
-    
-    driver = session(login['username'], login['password'])
-    main(driver, objects, url)
+    driver = session(loginCache.login['username'], loginCache.login['password'], loginCache.login['url'])
+    main(driver, objects)
     driver.quit()
