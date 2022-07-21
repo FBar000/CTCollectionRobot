@@ -27,7 +27,7 @@ Done.
 
 ## Usage
 
-This is a sloppy stub. Clearer and more extensive documentation will come in a later version.
+This is a stub. More clear and extensive documentation will come in a later version.
 
 Use `automateLocAdm.py` to automate setting locations and admin status. The admin status will be "publicly accessible" and "accessioned" by default. Specifying the location will require configuration; the location I require is hardcoded as follows:
 
@@ -54,11 +54,42 @@ To use `automateLocAdm.py`, run
 
 Input the data requested. The script will start a session on CTCo, and iterate over the objects specified by the object identifiers generated from your input. Any errors during while on a given object will skip to the next object and print `passed #`, where `#` is the skipped object's identifier. 
 
-<br>
+## Logon 
 
-## TODO
+You will be prompted for your personal credentials when you run this program for the first time. The credentials are the url of your database, your username, and your password. If you want to change the site you're on, or if you changed your password, use the following commands to change your credentials:
 
-As mentioned, this project is temporary. I am learning how to make these same changes using the [database's API](https://manual.collectiveaccess.org/providence/developer/index.html) to develop more sustainable tools. In any case, here's the to-do list for this project
+Change username
+> `$ py configLogon.py -username [NEW USERNAME]`
 
-- Fix navigation: Immediately fails when multiple objects appear on search results for a given object_identifier
-- Soften location: Add a tool to set location path to custom locations
+Change password
+
+> `py configLogon.py -password [NEW PASSWORD]`
+
+Change url
+
+> `py configLogon.py -url [NEW URL]`
+
+
+Here's an example:
+```
+$ py configLogon.py -username my_newUSER
+Old username: my_oldUSER
+New username: my_newUSER
+$ 
+```
+
+### Possible Error
+
+If after running this you get the error:
+
+> `json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)`
+
+Manually set `credentials.json` to the following
+```
+{
+    "username": "",
+    "password": "",
+    "url": ""
+}
+```
+
