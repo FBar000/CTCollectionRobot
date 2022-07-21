@@ -3,15 +3,16 @@ For use on madison.ctcollections.org. Takes a list of object identifiers and log
 
 For usage, specify login credentials
 
-Federico Barrera
-6 June 2022
 '''
+import json
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Import steps used in process
 from methods import *
+from configLogon import setField
+
 
 # `objects` is a list with object identifier strings
 def main(driver, objects):
@@ -22,16 +23,6 @@ def main(driver, objects):
             format_item(driver, object_identifier)
         except:
             print('passed '+str(object_identifier))
-
-
-def loginData():
-    '''
-    Create dictionary with login credentials
-    '''
-    print("Input login credentials")
-    user = input('Username: ')
-    pas = input('Password: ')
-    return {'username': user, 'password': pas}
 
 
 def getHandleElements():
@@ -91,11 +82,7 @@ if __name__ == '__main__':
     '''
     Execute
     '''
-    # Login info
-    login = loginData()
     handle_elements = getHandleElements()
-    url = input('Site url:')
-
 
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
@@ -104,8 +91,18 @@ if __name__ == '__main__':
         for ob in objects:
             tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
-
-    
-    driver = session(login['username'], login['password'])
-    main(driver, objects, url)
+    # Check if credentials are cached
+    with open('cache/credentials.json', 'r') as jsonFile:
+        credential = json.load(jsonFile)
+    for key in credential:
+        # Initilize if credentials are absent
+        if credential[key] == "":
+            tmp = input(f"{key}: ")
+            setField(key, tmp)
+    # Use credentials
+    with open('cache/credentials.json', 'r') as jsonFile:
+        credential = json.load(jsonFile)
+    print(credential)
+    driver = session(credential['username'], credential['password'], credential['url'])
+    main(driver, objects)
     driver.quit()

@@ -1,8 +1,6 @@
 '''
 Initialize driver object for use in madison CTCo
 
-Federico Barrera
-12 July 2022
 '''
 from selenium import webdriver
 from selenium.webdriver.common.by import By
