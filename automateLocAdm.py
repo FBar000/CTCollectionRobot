@@ -3,14 +3,11 @@ For use on madison.ctcollections.org. Takes a list of object identifiers and log
 
 For usage, specify login credentials
 
-Federico Barrera
-6 June 2022
 '''
 import json
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from loginCache import credentials
 
 # Import steps used in process
 from methods import *
@@ -94,7 +91,6 @@ if __name__ == '__main__':
         for ob in objects:
             tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
-
     # Check if credentials are cached
     with open('cache/credentials.json', 'r') as jsonFile:
         credential = json.load(jsonFile)
@@ -103,10 +99,10 @@ if __name__ == '__main__':
         if credential[key] == "":
             tmp = input(f"{key}: ")
             setField(key, tmp)
-
+    # Use credentials
     with open('cache/credentials.json', 'r') as jsonFile:
         credential = json.load(jsonFile)
-
+    print(credential)
     driver = session(credential['username'], credential['password'], credential['url'])
     main(driver, objects)
     driver.quit()

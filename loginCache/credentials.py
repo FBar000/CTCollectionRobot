@@ -1,6 +1,0 @@
-'''
-
-Stores credentials between sessions
-
-
-'''

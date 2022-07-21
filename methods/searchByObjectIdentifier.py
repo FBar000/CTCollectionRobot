@@ -3,8 +3,7 @@ Search for an item, given its object identifier.
 
 For use in the CTCo website, as formatted 15 July 2022
 
-Federico Barrera
-15 July 2022
+
 '''
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By

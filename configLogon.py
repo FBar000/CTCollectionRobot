@@ -15,7 +15,7 @@ def main():
     """
     # Help screen
     if sys.argv[1] == '-h':
-        print('\nCredential names: \n\t username \n\t password \n\t url\n')
+        print('\nCredential names: \n\t username \n\t password \n\t url\n\n delete')
         return 0
     # Verify input: ensure valid credentials
     modes = ['username', 'password', 'url']
