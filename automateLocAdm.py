@@ -6,13 +6,16 @@ For usage, specify login credentials
 Federico Barrera
 6 June 2022
 '''
+import json
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from loginCache import credentials
 
 # Import steps used in process
 from methods import *
-import loginCache
+from configLogon import setField
+
 
 # `objects` is a list with object identifier strings
 def main(driver, objects):
@@ -82,16 +85,7 @@ if __name__ == '__main__':
     '''
     Execute
     '''
-    # Fill credentials if necessary
-    if len(loginCache.login['username']) == 0:
-        loginCache.login['username'] = str(input('Username: '))
-    if len(loginCache.login['password']) == 0:
-        loginCache.login['password'] = str(input('Password: '))
-    if len(loginCache.login['url']) == 0:
-        loginCache.login['url'] = str(input('url: '))
-    
     handle_elements = getHandleElements()
-    url = input('Site url:')
 
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
@@ -101,6 +95,18 @@ if __name__ == '__main__':
             tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
 
-    driver = session(loginCache.login['username'], loginCache.login['password'], loginCache.login['url'])
+    # Check if credentials are cached
+    with open('cache/credentials.json', 'r') as jsonFile:
+        credential = json.load(jsonFile)
+    for key in credential:
+        # Initilize if credentials are absent
+        if credential[key] == "":
+            tmp = input(f"{key}: ")
+            setField(key, tmp)
+
+    with open('cache/credentials.json', 'r') as jsonFile:
+        credential = json.load(jsonFile)
+
+    driver = session(credential['username'], credential['password'], credential['url'])
     main(driver, objects)
     driver.quit()
