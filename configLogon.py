@@ -4,7 +4,9 @@ Scripts for configuring logon data.
 
 '''
 import json
+import os
 import sys
+from threading import local
 
 def main():
     """
@@ -45,14 +47,15 @@ def setField(field_key, new_value):
     """
     Update values in cache/credentials.json
     """
-    with open('cache/credentials.json', 'r') as jsonFile:
+    file_path = os.path.dirname(os.path.realpath(__file__)) + '/cache/credentials.json'
+    with open(file_path, 'r') as jsonFile:
         data = json.load(jsonFile)
     try:
         data[field_key] = new_value
     except KeyError:
         print("Key Error. Must be 'username', 'password', or 'url'")
         return 1    
-    with open('cache/credentials.json', 'w') as jsonFile:
+    with open(file_path, 'w') as jsonFile:
         json.dump(data, jsonFile)
 
 if __name__ == '__main__':

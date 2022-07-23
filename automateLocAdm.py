@@ -5,6 +5,8 @@ For usage, specify login credentials
 
 '''
 import json
+import pathlib
+from posixpath import abspath
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -92,7 +94,9 @@ if __name__ == '__main__':
             tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
         objects=tmp
     # Check if credentials are cached
-    with open('cache/credentials.json', 'r') as jsonFile:
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    credential_file = os.path.join(local_path+ '/cache/credentials.json')
+    with open(credential_file, 'r') as jsonFile:
         credential = json.load(jsonFile)
     for key in credential:
         # Initilize if credentials are absent
@@ -100,9 +104,9 @@ if __name__ == '__main__':
             tmp = input(f"{key}: ")
             setField(key, tmp)
     # Use credentials
-    with open('cache/credentials.json', 'r') as jsonFile:
+    with open(credential_file, 'r') as jsonFile:
         credential = json.load(jsonFile)
-    print(credential)
+    print(f"Using credentials: \n\t username: {credential['username']} \n\t password: {credential['password']} \n\t url: {credential['url']}\n")
     driver = session(credential['username'], credential['password'], credential['url'])
     main(driver, objects)
     driver.quit()
