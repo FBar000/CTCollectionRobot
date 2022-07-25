@@ -5,7 +5,6 @@ For usage, specify login credentials
 
 '''
 import json
-import pathlib
 from posixpath import abspath
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -57,7 +56,8 @@ def format_item(driver, object_identifier):
         id1 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_0_item_1_edit'
         id2 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_1_item_75_edit'
         id3 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_2_item_916_edit'
-        id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_934_edit'
+        # id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_934_edit'
+        id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_935_edit'
         path = [id1, id2, id3, id4]
         for i in path:
             but = WebDriverWait(driver, 10).until(
