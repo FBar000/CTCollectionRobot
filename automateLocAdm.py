@@ -5,10 +5,8 @@ For usage, specify login credentials
 
 '''
 import json
-from posixpath import abspath
+from lib2to3.pgen2 import driver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # Import steps used in process
 from methods import *
@@ -16,12 +14,12 @@ from configLogon import setField
 
 
 # `objects` is a list with object identifier strings
-def main(driver, objects):
+def main(driver, objects, location_string):
     """Iterate over objects"""
     # loop over objects
     for object_identifier in objects:
         try:
-            format_item(driver, object_identifier)
+            format_item(driver, object_identifier, location_string)
         except:
             print('passed '+str(object_identifier))
 
@@ -42,33 +40,18 @@ def getHandleElements():
             parts.append(idx)
     return parts
 
-def format_item(driver, object_identifier):
+def format_item(driver, object_identifier, location_string):
     '''
     Set object location and admin status
     '''
     searchByObjectIdentifier(driver, object_identifier)
-    # navigate to Location Editor
-    url = driver.current_url
-    tmp = url.split('Edit/')
-    driver.get(tmp[0]+'Edit/Screen51/'+tmp[1])
     try:
-        # set location: Root/LA/Lateral1/Draw3
-        id1 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_0_item_1_edit'
-        id2 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_1_item_75_edit'
-        id3 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_2_item_916_edit'
-        # id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_934_edit'
-        id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_935_edit'
-        path = [id1, id2, id3, id4]
-        for i in path:
-            but = WebDriverWait(driver, 10).until(
-                EC.element_to_be_clickable((By.ID, i))
-            )
-            but.click()
-
+        # set location: ARoot/LA/Lateral1/Draw3
+        setLocation(driver, location_string)
         # Save
         driver.find_element(By.XPATH, "//a[@aria-label='Save']").click()
         # navigate to Admin Status Editor
-        driver.get(tmp[0]+'Edit/Screen52/'+tmp[1])
+        getURL(driver, 'Screen52')
         # Set to accessioned
         driver.find_element(By.ID, 'P208ObjectEditorForm_attribute_162_162_new_0').click()
         # Allow public access
@@ -84,8 +67,8 @@ if __name__ == '__main__':
     '''
     Execute
     '''
+    # Get handles
     handle_elements = getHandleElements()
-
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
     for i in range(1, len(handle_elements)):
@@ -107,6 +90,7 @@ if __name__ == '__main__':
     with open(credential_file, 'r') as jsonFile:
         credential = json.load(jsonFile)
     print(f"Using credentials: \n\t username: {credential['username']} \n\t password: {credential['password']} \n\t url: {credential['url']}\n")
+    # Run
     driver = session(credential['username'], credential['password'], credential['url'])
-    main(driver, objects)
+    main(driver, objects, 'Storage locations / Lee Academy / Lateral File 1 / Draw 4')
     driver.quit()
