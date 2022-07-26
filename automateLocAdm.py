@@ -69,6 +69,8 @@ if __name__ == '__main__':
     '''
     # Get handles
     handle_elements = getHandleElements()
+    # Ask for location  TODO: Validation
+    location = input('Location: ')
     # Generate object identifier
     objects = [i for i in handle_elements[0]]
     for i in range(1, len(handle_elements)):
@@ -92,5 +94,5 @@ if __name__ == '__main__':
     print(f"Using credentials: \n\t username: {credential['username']} \n\t password: {credential['password']} \n\t url: {credential['url']}\n")
     # Run
     driver = session(credential['username'], credential['password'], credential['url'])
-    main(driver, objects, 'Storage locations / Lee Academy / Lateral File 1 / Draw 4')
+    main(driver, objects, location)
     driver.quit()

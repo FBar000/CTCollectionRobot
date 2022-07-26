@@ -25,32 +25,19 @@ Done.
 
 <br>
 
-## Usage
+## Set Location and Admin Status
 
 Use `automateLocAdm.py` to automate setting locations and admin status. The admin status will be "publicly accessible" and "accessioned" by default. Specifying the location will require configuration; the location I require is hardcoded as follows:
-
-```
-...
-id1 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_0_item_1_edit'
-id2 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_1_item_75_edit'
-id3 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_2_item_916_edit'
-id4 = 'hierBrowser_P205ObjectEditorFormhierarchyBrowsernew_0_level_3_item_934_edit'
-path = [id1, id2, id3, id4]
-for i in path:
-but = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.ID, i))
-)
-but.click()
-...
-```
-
-For different locations, use the id's of the web elements that you must click to specify a location instead.
 
 To use `automateLocAdm.py`, run
 
 >  `py automateLocAdm.py`
 
-Input the data requested. The script will start a session on CTCo, and iterate over the objects specified by the object identifiers generated from your input. Any errors during while on a given object will skip to the next object and print `passed #`, where `#` is the skipped object's identifier. 
+Input the data requested. The script will start a session on CTCo, and iterate over the objects specified by the object identifiers generated from your input. 
+
+When prompted for a location (`location: `), input a path to a location as `Storage locations / PATH / TO / LOCATION`.
+
+Any errors during while on a given object will skip to the next object and print `passed #`, where `#` is the skipped object's identifier. 
 
 ## Logon 
 
