@@ -3,7 +3,7 @@
 
 ## Description
 
-These scripts automate parts of the accessioning process on the Madison [Collective Access](https://collectiveaccess.org/) database, and possibly the Collective Access database interface more broadly. The scripts use python's selenium library to navigate the database website as any user would and therby automate certain tasks. This is a temporary solution and should not be relied upon; the scripts rely on a version of the website which is not guaranteed to remain the same. 
+These scripts automate parts of the accessioning process on the Madison [Collective Access](https://collectiveaccess.org/) database, and possibly the Collective Access database interface more broadly. The scripts use python's selenium library to navigate the database website as any user would and thereby automate certain tasks. This is a temporary solution and should not be relied upon; the scripts rely on a version of the website which is not guaranteed to remain the same. 
 
 <br>
 
@@ -26,8 +26,6 @@ Done.
 <br>
 
 ## Usage
-
-This is a stub. More clear and extensive documentation will come in a later version.
 
 Use `automateLocAdm.py` to automate setting locations and admin status. The admin status will be "publicly accessible" and "accessioned" by default. Specifying the location will require configuration; the location I require is hardcoded as follows:
 
