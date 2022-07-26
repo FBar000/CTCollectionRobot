@@ -82,7 +82,7 @@ If after running this you get the error:
 
 > `json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)`
 
-Manually set `credentials.json` to the following
+Manually set `credentials.json` to:
 ```
 {
     "username": "",
