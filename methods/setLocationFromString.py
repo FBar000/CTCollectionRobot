@@ -9,14 +9,13 @@ from selenium.webdriver.common.by import By
 
 def bulkLocationSet(driver, object_identifiers, location_string):
     """
-    Set the location of a set of objects.
+    Create a set of objects for manual batch editing.
 
     Uses batch editing in Collective Access.
 
     Parameters;
         driver : Selenium webDriver element
         object_identifiers (list[string]) : A list of the object identifiers for the objects to be accessioned
-        location_string (string) : the location for an object
     Return:
         None
     """
@@ -30,25 +29,6 @@ def bulkLocationSet(driver, object_identifiers, location_string):
     # Save
     time.sleep(0.75)
     driver.find_element(By.XPATH, "//a/*[contains(text(), 'Save')]").click()
-    # Go to editor
-    driver.find_element(By.XPATH, "//a[@aria-label='Batch edit']").click()
-    # Go to location editor
-    driver.find_element(By.XPATH, "//a[contains(text(), 'Location')]").click()
-    # Edit location
-    driver.find_element(By.XPATH, "//a[contains(text(), 'Update location')]").click()
-    time.sleep(0.5)
-    setLocation(driver, location_string)
-    # Delete set
-    driver.find_element(By.XPATH, "//a[@aria-label='Execute batch edit']").click()
-    driver.find_element(By.XPATH, "//input[@id='caSendEmailWhenDone']").click()
-    driver.find_element(By.XPATH, "(//a[@aria-label='Execute batch edit'])[3]").click()
-    # Delete set
-    a = driver.find_element(By.XPATH, "//a[contains(text(), '[BLANK]')]")
-    driver.get(a.get_attribute('href'))
-    for i in range(2):
-        driver.find_element(By.XPATH, "//a//*[contains(text(), 'Delete')]").click() 
-    time.sleep(1)
-    
 
 
 # PC: driver on main object page
