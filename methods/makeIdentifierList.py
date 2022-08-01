@@ -85,6 +85,10 @@ def makeHandlesfromElements(handle_elements):
         objects=tmp
     return objects
 
+def makeHandles():
+    '''Makes a list of object identifier strings'''
+    handle_elements = getHandleElements()
+    return makeHandlesfromElements(handle_elements)
 
 if __name__ == '__main__':
     txtFile()
