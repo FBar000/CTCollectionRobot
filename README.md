@@ -27,13 +27,11 @@ Done.
 
 ## Usage
 
-<br>
 
 #### Disclaimer
 
 All these programs assume that the items in your database have unique object identifiers formatted as a set of strings joined together by periods (e.g. [string].[string].[string].) Furthermore, they assume that the last of these strings is numerical and serial (e.g. X.0, X.1, X.2,... or X.Y.01, X.Y.02,...). To account for zero-padding, use the `width` entry when specifying series of object identifiers (see below).
 
-<br>
 
 ### Automated Set Creation
 
@@ -54,7 +52,6 @@ Section 2: Label or Index? (l/i) i
         Width: 3
 ```
 
-<br>
 
 ### Set Location and Admin Status
 
@@ -69,9 +66,6 @@ Input the data requested. The script will start a session on CTCo, and iterate o
 When prompted for a location (`location: `), input a path to a location as `Storage locations / PATH / TO / LOCATION`.
 
 Any errors during while on a given object will skip to the next object and print `passed #`, where `#` is the skipped object's identifier. 
-
-
-<br>
 
 ### Logon 
 
@@ -96,8 +90,6 @@ Old username: my_oldUSER
 New username: my_newUSER
 $ 
 ```
-
-<br>
 
 #### Possible Error
 
