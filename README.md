@@ -35,7 +35,7 @@ All these programs assume that the items in your database have unique object ide
 
 ### Automated Set Creation
 
-The most powerful tool in this package is `createSet.py`. The collective access database supports the creation of sets to simultaneously manipulate the data of many objects. The downside is that in order to execute batch edits, users must first individually add items to a set. This script automates this initialization. In the directory where this project is located, run
+The most powerful tool in this package is `createSet.py`. It allows you to automate the creation of sets, which you can use to edit items in batches. 
 
 > `$ py createSet.py`
 
