@@ -1,7 +1,5 @@
 """
 Program to automatically create a set of items.
-
-
 """
 from methods import *
 import json
@@ -15,7 +13,7 @@ def createSet(driver, object_identifiers):
     Uses batch editing in Collective Access.
 
     Parameters;
-        driver : Selenium webDriver element
+        driver: Selenium webDriver element
         object_identifiers (list[string]) : A list of the object identifiers for the objects to be accessioned
     Return:
         None
@@ -29,12 +27,13 @@ def createSet(driver, object_identifiers):
             box.send_keys(ident)
             driver.find_element(By.XPATH, f"//a[contains(text(), '{ident}')]").click()
             time.sleep(0.5)
+            box.clear()
         except:
             box.clear()
             pass
-    # Save
     time.sleep(0.75)
-    driver.find_element(By.XPATH, "//a/*[contains(text(), 'Save')]").click()
+    savePage(driver)
+
 
 
 if __name__ == '__main__':
@@ -44,11 +43,10 @@ if __name__ == '__main__':
     credential_file = os.path.join(local_path+ '/cache/credentials.json')
     with open(credential_file, 'r') as jsonFile:
         credential = json.load(jsonFile)
-
     # Create set of objects
     objects = makeHandles()    
-
     # Navigate to sets
-    dr = session(credential['username'], credential['password'], credential['url'])
+    dr = session()
     createSet(dr, objects)
-    dr.quit()
+    print("Done")
+    dr.get(r"https://cdn.pixabay.com/photo/2020/04/10/13/28/success-5025797_1280.png")

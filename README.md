@@ -78,20 +78,20 @@ Any errors during while on a given object will skip to the next object and print
 You will be prompted for your personal credentials when you run this program for the first time. The credentials are the url of your database, your username, and your password. If you want to change the site you're on, or if you changed your password, use the following commands to change your credentials:
 
 Change username
-> `$ py configLogon.py -username [NEW USERNAME]`
+> `$ py cache/configLogon.py -username [NEW USERNAME]`
 
 Change password
 
-> `py configLogon.py -password [NEW PASSWORD]`
+> `py cache/configLogon.py -password [NEW PASSWORD]`
 
 Change url
 
-> `py configLogon.py -url [NEW URL]`
+> `py cache/configLogon.py -url [NEW URL]`
 
 
 Here's an example:
 ```
-$ py configLogon.py -username my_newUSER
+$ py cache/configLogon.py -username my_newUSER
 Old username: my_oldUSER
 New username: my_newUSER
 $ 

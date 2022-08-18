@@ -7,28 +7,30 @@ Set an object's location from a string of form
 import time
 from selenium.webdriver.common.by import By
 
-def bulkLocationSet(driver, object_identifiers, location_string):
-    """
-    Create a set of objects for manual batch editing.
+# # In Progress
+# def bulkLocationSet(driver, object_identifiers, location_string):
+#     """
+#     Create a set of objects for manual batch editing.
 
-    Uses batch editing in Collective Access.
+#     Uses batch editing in Collective Access.
 
-    Parameters;
-        driver : Selenium webDriver element
-        object_identifiers (list[string]) : A list of the object identifiers for the objects to be accessioned
-    Return:
-        None
-    """
-    driver.implicitly_wait(5)
-    if not driver.current_url.endswith('/index.php/manage/sets/SetEditor/Edit/set_id/0/type_id/12/table_num/57'):            # Fix this; Not working
-        driver.get("/".join(driver.current_url.split('/')[:3])+'/index.php/manage/sets/SetEditor/Edit/set_id/0/type_id/12/table_num/57')
-    box = driver.find_element(By.XPATH, "//div[contains(text(), 'Add')]/input")
-    for ident in object_identifiers:
-        box.send_keys(ident)
-        driver.find_element(By.XPATH, f"//a[contains(text(), '{ident}')]").click()
-    # Save
-    time.sleep(0.75)
-    driver.find_element(By.XPATH, "//a/*[contains(text(), 'Save')]").click()
+#     Parameters;
+#         driver : Selenium webDriver element
+#         object_identifiers (list[string]) : A list of the object identifiers for the objects to be accessioned
+#     Return:
+#         None
+#     """
+#     # Create Set
+#     driver.implicitly_wait(5)
+#     if not driver.current_url.endswith('/index.php/manage/sets/SetEditor/Edit/set_id/0/type_id/12/table_num/57'):            # Fix this; Not working
+#         driver.get("/".join(driver.current_url.split('/')[:3])+'/index.php/manage/sets/SetEditor/Edit/set_id/0/type_id/12/table_num/57')
+#     box = driver.find_element(By.XPATH, "//div[contains(text(), 'Add')]/input")
+#     for ident in object_identifiers:
+#         box.send_keys(ident)
+#         driver.find_element(By.XPATH, f"//a[contains(text(), '{ident}')]").click()
+#     # Save
+#     time.sleep(0.75)
+#     driver.find_element(By.XPATH, "//a/*[contains(text(), 'Save')]").click()
 
 
 # PC: driver on main object page
@@ -57,10 +59,3 @@ def setLocation(driver, location_string):
     driver.find_element(By.XPATH, f"(//a[contains(text(), 'Storage locations')])[2]/../div").click()
     for loc in path[1:]:
         driver.find_element(By.XPATH, f"//a[contains(text(), '{loc}')]/../div").click()
-
-def getURL(driver, new_screen):
-    # navigate to Location Editor
-    url = driver.current_url
-    tmp = url[33:].split('/')
-    new_url = url[:33] + '/'.join(tmp[:6]) +f"/{new_screen}/object_id/{tmp[-1]}"
-    driver.get(new_url)

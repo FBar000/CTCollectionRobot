@@ -10,8 +10,6 @@ from selenium.webdriver.common.by import By
 
 # Import steps used in process
 from methods import *
-from configLogon import setField
-
 
 # `objects` is a list with object identifier strings
 def main(driver, objects, location_string):
@@ -49,7 +47,7 @@ def format_item(driver, object_identifier, location_string):
         # set location: ARoot/LA/Lateral1/Draw3
         setLocation(driver, location_string)
         # Save
-        driver.find_element(By.XPATH, "//a[@aria-label='Save']").click()
+        savePage(driver)
         # navigate to Admin Status Editor
         getURL(driver, 'Screen52')
         # Set to accessioned
@@ -58,8 +56,7 @@ def format_item(driver, object_identifier, location_string):
         driver.find_element(By.ID, 'P210ObjectEditorFormaccess').click()
         driver.find_element(By.XPATH, "//select[@id='P210ObjectEditorFormaccess']/option[@value='1']").click()
         driver.find_element(By.XPATH, "//select[@id='P209ObjectEditorFormstatus']/option[@value='0']").click()
-        # Save
-        driver.find_element(By.XPATH, "//a[@aria-label='Save']").click()
+        savePage(driver)
     except: pass
 
 
@@ -93,6 +90,6 @@ if __name__ == '__main__':
         credential = json.load(jsonFile)
     print(f"Using credentials: \n\t username: {credential['username']} \n\t password: {credential['password']} \n\t url: {credential['url']}\n")
     # Run
-    driver = session(credential['username'], credential['password'], credential['url'])
+    driver = session()
     main(driver, objects, location)
     driver.quit()

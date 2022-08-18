@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # Navigates to object_identifier page
 def searchByObjectIdentifier(driver, object_identifier):
     """
-    Navigate to object page by its object identifier
+    Navigate to an object's page by its object identifier
 
     Parameters:
         driver (webdriver) : a selenium driver object with an initialized CTCo session.

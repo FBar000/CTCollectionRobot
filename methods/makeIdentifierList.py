@@ -11,6 +11,62 @@ Feel free to feed previous as argument to automateLocAdm.py
 import os
 
 
+def makeHandles():
+    '''
+    Makes a list of object identifier strings
+    
+    Arguments: 
+        In Terminal, requests # of sections in identifier, type (label/index), and either the string (if label) or the lower bound, upper bound, and width (if id)
+    Return:
+        objects [list(string)]: A list with the object identifier strings
+    '''
+    handle_elements = getHandleElements()
+    objects = makeHandlesfromElements(handle_elements)
+    return objects
+
+
+def getHandleElements():
+    '''
+    Get elements to construct object identifiers
+
+    Arguments:
+        In Terminal, requests # of sections in identifier, type (label/index), and either the string (if label) or the lower bound, upper bound, and width (if id)
+    Return:
+        handle_elements [list(str)]: A list with the sections of the object identifier 
+    '''
+    n = int(input('Sections in object identifiers: '))
+    handle_elements = []
+    for i in range(n):
+        n = input(f"Section {i+1}: Label or Index? (l/i) ")
+        if n == 'l':
+            handle_elements.append([input('\tLabel: ')])
+        else:
+            l = int(input('\tLower bound: '))
+            t = int(input('\tUpper bound: '))
+            width = int(input('\tWidth: '))
+            idx = [str(i).zfill(width) for i in range(l,t+1)]
+            handle_elements.append(idx)
+    return handle_elements
+
+def makeHandlesfromElements(handle_elements):
+    '''
+    Generate list of object identifier strings from handle_elements
+    
+    Parameters:
+        handle_elements [list(string)] : A list of the elements to the handle elements
+    Returns: 
+        objects [list(string)] : A list of the object identifiers
+    '''
+    # Generate object identifier
+    objects = [i for i in handle_elements[0]]
+    for i in range(1, len(handle_elements)):
+        tmp = []
+        for ob in objects:
+            tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
+        objects=tmp
+    return objects
+
+
 def txtFile():
     """Creates a txt file with object identifiers in ~/data"""
     # Gather handle dataa
@@ -51,44 +107,6 @@ def txtFile():
             f.write(f'{i}\n')
     return path
 
-def getHandleElements():
-    '''Get elements to construct object identifiers'''
-    n = int(input('Sections in object identifiers: '))
-    parts = []
-    for i in range(n):
-        n = input(f"Section {i+1}: Label or Index? (l/i) ")
-        if n == 'l':
-            parts.append([input('\tLabel: ')])
-        else:
-            l = int(input('\tLower bound: '))
-            t = int(input('\tUpper bound: '))
-            width = int(input('\tWidth: '))
-            idx = [str(i).zfill(width) for i in range(l,t+1)]
-            parts.append(idx)
-    return parts
-
-def makeHandlesfromElements(handle_elements):
-    '''
-    Generate list of object identifier strings from handle_elements
-    
-    Parameters:
-        handle_elements [list(string)] : A list of the elements to the handle elements
-    Returns: 
-        objects [list(string)] : A list of the object identifiers
-    '''
-    # Generate object identifier
-    objects = [i for i in handle_elements[0]]
-    for i in range(1, len(handle_elements)):
-        tmp = []
-        for ob in objects:
-            tmp += [".".join([ob, twig]) for twig in handle_elements[i]]
-        objects=tmp
-    return objects
-
-def makeHandles():
-    '''Makes a list of object identifier strings'''
-    handle_elements = getHandleElements()
-    return makeHandlesfromElements(handle_elements)
 
 if __name__ == '__main__':
     txtFile()
