@@ -5,6 +5,7 @@ from methods import *
 import json
 import time
 from selenium.webdriver.common.by import By
+import os
 
 def createSet(driver, object_identifiers):
     """

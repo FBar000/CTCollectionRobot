@@ -1,4 +1,4 @@
-from .initializeCTCoSession import *
+from .InitializeCTCoSession import *
 from .navigateObjectPage import *
 from .searchByObjectIdentifier import *
 from .makeIdentifierList import *

@@ -7,8 +7,6 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from cache.configLogon import *
-
 
 # A single session of the CTCollections 
 def session():
@@ -19,7 +17,7 @@ def session():
         driver (webdriver) : a selenium webdriver in a logged session
     """
     credentials = getCredentials()
-    driver = webdriver.Chrome("C:\Drivers\SeleniumBrowsers\chromedriver.exe")
+    driver = webdriver.Chrome("C:\Program Files\Google\Chrome\Application\chrome.exe")
     driver.get(credentials["url"])
     # sign in 
     user = WebDriverWait(driver, timeout=5).until(lambda u: u.find_element(By.XPATH,"//input[@name='username']"))
@@ -52,3 +50,6 @@ def getCredentials():
     with open(credential_file, 'r') as jsonFile:
         credentials = json.load(jsonFile)
     return credentials
+
+if __name__ == 'main':
+    session()

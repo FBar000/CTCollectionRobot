@@ -1,4 +1,3 @@
-from methods import *
 from selenium.webdriver.common.by import By
 
 def savePage(driver):
