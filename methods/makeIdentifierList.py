@@ -107,6 +107,5 @@ def txtFile():
             f.write(f'{i}\n')
     return path
 
-
 if __name__ == '__main__':
     txtFile()
