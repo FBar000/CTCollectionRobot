@@ -1,1 +1,1 @@
-from configLogon import *
+from .configLogon import *

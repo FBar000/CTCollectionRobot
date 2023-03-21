@@ -7,6 +7,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from cache import *
 
 # A single session of the CTCollections 
 def session():
